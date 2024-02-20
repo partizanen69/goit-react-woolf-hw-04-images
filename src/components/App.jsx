@@ -21,16 +21,25 @@ export class App extends Component {
     totalImages: 0,
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.searchKeyword !== prevState.searchKeyword) {
+      this.getImages();
+    }
+  }
+
   handleSearchChange = () => {
     if (this.state.images.length === 0) {
       return;
     }
-    this.setState({ images: [] });
+    this.setState({ images: [], totalImages: 0, activeImageUrl: null });
   };
 
   handleSubmit = searchKeyword => {
-    this.setState({ searchKeyword }, () => {
-      this.getImages();
+    this.setState({
+      searchKeyword,
+      images: [],
+      totalImages: 0,
+      activeImageUrl: null,
     });
   };
 
@@ -61,8 +70,7 @@ export class App extends Component {
       });
   };
 
-  openImageModal = imgId => {
-    const { largeImageURL } = this.state.images.find(img => img.id === imgId);
+  openImageModal = largeImageURL => {
     this.setState({ activeImageUrl: largeImageURL });
   };
 
@@ -72,7 +80,7 @@ export class App extends Component {
 
   render() {
     const { activeImageUrl, images, fetchInProgress, totalImages } = this.state;
-    const isEnd = images.length + IMAGES_PER_PAGE > totalImages;
+    const isEnd = totalImages <= images.length;
 
     return (
       <AppStyled>
