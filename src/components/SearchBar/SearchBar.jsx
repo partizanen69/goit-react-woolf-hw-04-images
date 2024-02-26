@@ -19,7 +19,7 @@ export class SearchBar extends Component {
   };
 
   handleInputChange = e => {
-    this.setState({ value: e.target.value.trim() });
+    this.setState({ value: e.target.value });
   };
 
   render() {
