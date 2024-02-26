@@ -20,7 +20,6 @@ export class SearchBar extends Component {
 
   handleInputChange = e => {
     this.setState({ value: e.target.value.trim() });
-    this.props.onChange();
   };
 
   render() {

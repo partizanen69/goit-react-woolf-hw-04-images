@@ -27,14 +27,12 @@ export class App extends Component {
     }
   }
 
-  handleSearchChange = () => {
-    if (this.state.images.length === 0) {
+  handleSubmit = searchKeyword => {
+    if (searchKeyword === this.state.searchKeyword) {
+      toast.warning(`You already see results by word: ${searchKeyword}`);
       return;
     }
-    this.setState({ images: [], totalImages: 0, activeImageUrl: null });
-  };
 
-  handleSubmit = searchKeyword => {
     this.setState({
       searchKeyword,
       images: [],
@@ -86,7 +84,6 @@ export class App extends Component {
       <AppStyled>
         <SearchBar
           onSubmit={this.handleSubmit}
-          onChange={this.handleSearchChange}
           submitDisabled={fetchInProgress}
         />
 
