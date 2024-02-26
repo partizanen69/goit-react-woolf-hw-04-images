@@ -42,7 +42,7 @@ export class App extends Component {
   };
 
   getImages = () => {
-    const searchKeyword = this.state.searchKeyword.trim();
+    const searchKeyword = this.state.searchKeyword;
     this.setState({ fetchInProgress: true });
 
     const page = Math.floor(this.state.images.length / IMAGES_PER_PAGE) + 1;

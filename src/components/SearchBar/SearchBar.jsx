@@ -15,7 +15,7 @@ export class SearchBar extends Component {
       return;
     }
 
-    this.props.onSubmit(this.state.value);
+    this.props.onSubmit(this.state.value.trim());
   };
 
   handleInputChange = e => {
